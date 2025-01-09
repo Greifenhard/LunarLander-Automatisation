@@ -68,22 +68,20 @@ def genetic_algorithm(env):
     # Speichern der besten Strategie
     np.save('best_strategy.npy', best_individual)
 
-def load_and_run(n_times=10):
+def load_and_run(n_times=10, render_mode="human"):
     # Beste Strategie laden
     best_strategy = np.load('best_strategy.npy')
-    play_env = gym.make('LunarLander-v3', render_mode=None)
+    play_env = gym.make('LunarLander-v3', render_mode=render_mode)
     
     
     for _ in range(n_times):
         # Benutze die geladene Strategie
         state, _ = play_env.reset()
-        play_env.render()
+
         total_reward = 0
         for _ in range(1000):
             action = np.argmax(np.dot(state, best_strategy))
-            state, reward, terminated, truncated, _ = play_env.step(action)
-            play_env.render()
-            
+            state, reward, terminated, truncated, _ = play_env.step(action)            
             total_reward += reward
             
             if terminated or truncated:
@@ -93,4 +91,4 @@ def load_and_run(n_times=10):
     play_env.close()
 
 #genetic_algorithm(train_env)  # Berechne und speichere den besten genetischen Algorithmus
-load_and_run()  # Lade den besten Algorithmus und spiele damit
+load_and_run(30)  # Lade den besten Algorithmus und spiele damit
