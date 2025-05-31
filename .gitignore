@@ -1,2 +1,4 @@
 DEV_*
 *.npy
+*.zip
+*test*

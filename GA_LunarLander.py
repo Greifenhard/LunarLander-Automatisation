@@ -71,7 +71,7 @@ def genetic_algorithm(env):
 def load_and_run(n_times=10, render_mode="human"):
     # Beste Strategie laden
     best_strategy = np.load('best_strategy.npy')
-    play_env = gym.make('LunarLander-v3', render_mode=render_mode)
+    play_env = gym.make('LunarLander-v3', render_mode=render_mode, gravity=-11.0)
     
     
     for _ in range(n_times):
@@ -91,4 +91,4 @@ def load_and_run(n_times=10, render_mode="human"):
     play_env.close()
 
 #genetic_algorithm(train_env)  # Berechne und speichere den besten genetischen Algorithmus
-load_and_run(30)  # Lade den besten Algorithmus und spiele damit
+load_and_run(300)  # Lade den besten Algorithmus und spiele damit
